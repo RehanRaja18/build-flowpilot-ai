@@ -14,6 +14,9 @@ function getSignupMessage(error: { code?: string; message: string } | null) {
   if (code === 'email_address_invalid' || detail.includes('email_address_invalid')) {
     return 'Supabase rejected this email address. Use a personal mailbox, not an example or disposable address.'
   }
+  if (code === 'email_address_not_authorized' || detail.includes('email address not authorized')) {
+    return 'Supabase’s default email service only sends to authorized team addresses. Configure custom SMTP for Gmail and other users, or use a team email for testing.'
+  }
   if (code === 'over_email_send_rate_limit' || detail.includes('rate limit')) {
     return 'Email sending is temporarily rate-limited. Wait a few minutes and try again.'
   }
